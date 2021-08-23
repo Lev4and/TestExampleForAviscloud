@@ -1,0 +1,85 @@
+﻿@model WorkersViewModel
+<div class="card radius-15 border-lg-top-white">
+    <div class="card-body p-5">
+        <h2 class="mb-0">Данные о работнике</h2>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <div class="d-flex justify-content-start">
+                    <button data-worker-action="close" class="btn btn-danger m-1 px-5 radius-30">Закрыть</button>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="d-flex justify-content-end">
+                    <button data-worker-action="edit" class="btn btn-warning m-1 px-5 radius-30">Редактировать</button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="form-body">
+            <form method="post" action="/Home/Save">
+                <input type="hidden" asp-for="@Model.Worker.Id" />
+
+                <input type="hidden" asp-for="@Model.MaxDateOfBirth" />
+                <input type="hidden" asp-for="@Model.MinDateOfBirth" />
+
+                @if (Model.Genders != null)
+                {
+                    @for (int i = 0; i < Model.Genders.Count; i++)
+                    {
+                        <input type="hidden" name="Genders[@i].Key" value="@Model.Genders.ElementAt(i).Key" />
+                        <input type="hidden" name="Genders[@i].Value" value="@Model.Genders.ElementAt(i).Value" />
+                    }
+                }
+
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label">ФИО</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" disabled="disabled" asp-for="@Model.Worker.Name" required>
+                        <span class="invalid-feedback" style="display: block;" asp-validation-for="@Model.Worker.Name"></span>
+                    </div>
+                </div>
+                <div class="form-group row flex-row-reverse">
+                    <label class="col-sm-6 col-form-label">Адрес электронной почты</label>
+                    <div class="col-sm-6">
+                        <input type="email" class="form-control" disabled="disabled" asp-for="@Model.Worker.Email" required>
+                        <span class="invalid-feedback" style="display: block;" asp-validation-for="@Model.Worker.Email"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label">Пол</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" disabled="disabled" asp-for="@Model.Worker.Gender" required>
+                            @if (Model.Genders != null)
+                            {
+                                @foreach (var gender in Model.Genders)
+                                {
+                                    <option value="@gender.Key">@gender.Value</option>
+                                }
+                            }
+                        </select>
+                        <span class="invalid-feedback" style="display: block;" asp-validation-for="@Model.Worker.Gender"></span>
+                    </div>
+                </div>
+                <div class="form-group row flex-row-reverse">
+                    <label class="col-sm-6 col-form-label">Дата рождения</label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" min="@Model.MinDateOfBirth" max="@Model.MaxDateOfBirth" disabled="disabled" asp-for="@Model.Worker.DateOfBirth" required>
+                        <span class="invalid-feedback" style="display: block;" asp-validation-for="@Model.Worker.DateOfBirth"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="d-flex justify-content-end">
+                    <button data-worker-action="save" class="btn btn-success m-1 px-5 radius-30" disabled="disabled">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

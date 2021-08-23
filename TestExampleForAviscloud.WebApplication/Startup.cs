@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TestExampleForAviscloud.Model.Storage;
+using TestExampleForAviscloud.Model.Storage.Repositories.Abstract;
+using TestExampleForAviscloud.Model.Storage.Repositories.LINQ;
 
 namespace TestExampleForAviscloud.WebApplication
 {
@@ -18,6 +21,12 @@ namespace TestExampleForAviscloud.WebApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IGendersRepository, LINQGendersRepository>();
+            services.AddSingleton<IWorkersRepository, LINQWorkersRepository>();
+            services.AddSingleton<DataManager>();
+
+            services.AddSingleton<StorageContext>();
+
             services.AddControllersWithViews(x =>
             {
 

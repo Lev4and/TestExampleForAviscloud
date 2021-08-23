@@ -1,1 +1,20 @@
-﻿
+﻿@model WorkersViewModel
+@{ 
+    ViewData["Title"] = "Работники";
+}
+<div style="padding: 30px;">
+    <div class="row">
+        <div class="col-lg-12 col-xl-6" data-card-name="browse">
+            @await Html.PartialAsync("_BrowseWorkersPartial", Model)
+        </div>
+        <div class="col-lg-12 col-xl-6" data-card-name="form">
+            
+        </div>
+    </div>
+</div>
+@section ScriptsPage
+{
+    <script type="text/javascript">
+        initialize();
+    </script>
+}

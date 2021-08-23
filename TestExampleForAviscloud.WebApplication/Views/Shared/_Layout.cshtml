@@ -1,11 +1,19 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Привет, мир!</title>
+    @await Html.PartialAsync("_TitlePartial")
+    @await Html.PartialAsync("_MetatagsPartial")
+    @await Html.PartialAsync("_LogoPartial")
+    @await Html.PartialAsync("_CssPartial")
 </head>
 <body>
-    <main>
+    <main id="content" role="main">
         @RenderBody()
     </main>
+    @await Html.PartialAsync("_ScriptsPartial")
+    @if (IsSectionDefined("ScriptsPage")) 
+    { 
+        @await RenderSectionAsync("ScriptsPage")
+    }
 </body>
 </html>

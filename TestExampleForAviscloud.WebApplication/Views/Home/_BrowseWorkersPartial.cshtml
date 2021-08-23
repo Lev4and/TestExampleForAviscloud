@@ -1,0 +1,41 @@
+﻿@model WorkersViewModel
+<div class="card radius-15 border-lg-top-white">
+    <div class="card-body p-5">
+        <h2 class="mb-0">Работники</h2>
+        <hr>
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">ФИО</th>
+                        <th scope="col">Пол</th>
+                        <th scope="col">Дата рождения</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Workers != null)
+                    {
+                        @foreach (var worker in Model.Workers)
+                        {
+                            <tr data-worker-action="info" data-worker-id="@worker.Id" style="cursor: pointer;">
+                                <td>@worker.Name</td>
+                                <td>@Model.Genders[worker.Gender]</td>
+                                <td>@worker.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                                <td>@worker.Email</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col">ФИО</th>
+                        <th scope="col">Пол</th>
+                        <th scope="col">Дата рождения</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
